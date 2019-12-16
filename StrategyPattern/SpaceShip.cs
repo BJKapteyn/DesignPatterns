@@ -49,12 +49,12 @@ namespace StrategyPattern
         }
     }
     
-
+    //I'll define an interface that all weapons will derive from. We're going to exploit some polymorphism later.
     public interface WeaponType
     {
         void Fire();
     }
-
+    // Here I'll create a missile class that implements the WeaponType class and creates it's own version of the Fire() method
     public class Missile : WeaponType
     {
         public void Fire()
@@ -62,7 +62,7 @@ namespace StrategyPattern
             Console.WriteLine("Fire ze Missiles!");
         }
     }
-
+    //I'll do the same for our interdimensional rift cannon
     public class InterdimensionalRiftCannon : WeaponType
     {
         public void Fire()
@@ -70,7 +70,7 @@ namespace StrategyPattern
             Console.WriteLine("Charging cannon...dividing 1 by 0...FIR-");
         }
     }
-
+    //Creating the interface for our different types of flying and defining the Fly() method for each, just like the weapon classes.
     public interface FlightType
     {
         void Fly();
@@ -92,9 +92,50 @@ namespace StrategyPattern
         }
     }
 
-    public class SpaceShipStrategy
+    //Now I'm going to re-write my spaceship class to take advantage of my new classes. I made it abstract because it's meant to be derived from
+    //and not instantiated. Plus I don't really want boring weaponless space ships flying around. 
+    public abstract class SpaceShipStrategy
     {
-        public FlightType flightType;
-        public WeaponType weaponType;
+        public abstract string Color { get; set; }
+        public abstract string Name { get; set; }
+        public abstract string Captain { get; set; } 
+        //
+        //Here is where we declare our weapon types as it's parent class. This exploits polymorphism by enabling me to put any weapon type here
+        //later
+        public abstract FlightType flightType { get; set; }
+        //same for weapon class
+        public abstract WeaponType weaponType { get; set; }
+
+        //this method will envoke the different types of flying depending on which type of flight/weapon type is implemented. 
+        public void FlyShip()
+        {
+            flightType.Fly();
+        }
+
+        public void FireWeapon()
+        {
+            weaponType.Fire();
+        }
     }
+    //Now I'm going to create my first type of ship, the missile ship. We will use the SpaceShipStrategy as the parent class. 
+    public class MissileShip : SpaceShipStrategy
+    {
+        public override string Captain { get; set; }
+        public override string Name { get; set; }
+        public override string Color { get; set; }
+        public override FlightType flightType { get; set; }
+        public override WeaponType weaponType { get; set; }
+        //I don't really care about creating different missile ships for this exercise, so I'm going to set all of my properties to be the same
+        //for each iteration.
+        public MissileShip()
+        {
+            Color = "Gerbiflob";
+            Name = "Rocinante";
+            Captain = "Picard";
+
+            flightType = new SpaceFlight();
+            weaponType = new Missile();
+        }
+    }
+
 }
