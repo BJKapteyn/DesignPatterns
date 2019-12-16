@@ -133,6 +133,8 @@ namespace StrategyPattern
             Name = "Rocinante";
             Captain = "Picard";
 
+            //Here's our meat and potatoes for this pattern. I create my FlightType property as SpaceFlight() and weapon as Missile(). Now when I 
+            //envoke my FlyShip() method defined earlier, it will envoke the Fly() mothod from the SpaceFlight class.
             flightType = new SpaceFlight();
             weaponType = new Missile();
         }
