@@ -67,7 +67,7 @@ namespace StrategyPattern
     {
         public void Fire()
         {
-            Console.WriteLine("Charging cannon...dividing 1 by 0...FIR-");
+            Console.WriteLine("Charging cannon...dividing 1 by 0...FI-");
         }
     }
     //Creating the interface for our different types of flying and defining the Fly() method for each, just like the weapon classes.
