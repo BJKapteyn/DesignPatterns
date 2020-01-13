@@ -10,8 +10,8 @@ namespace StrategyPattern
     //over time. It adds flexibility to your code by preventing the need to change code in multiple areas of your codebase to make just one
     //change to a class's behavior. 
 
-    //Lets take an example of a SpaceShip class for a video game or some such:
-    //Let's go through each method and see if we can decide if they are likely to be modified in the future. 
+    //Take an example of a SpaceShip class for a video game or some such:
+    //I'll go through each method and see if we can decide if they are likely to be modified in the future. 
     public class SpaceShip
     {
         //These are the properties of our spaceship. For this exercise I'm going to define, but ignore them.
@@ -52,6 +52,7 @@ namespace StrategyPattern
     //I'll define an interface that all weapons will derive from. We're going to exploit some polymorphism later.
     public interface WeaponType
     {
+        //I'm sure we could include Reload() and other methods that go with specific weapons but let's keep it simple.
         void Fire();
     }
     // Here I'll create a missile class that implements the WeaponType class and creates it's own version of the Fire() method
@@ -127,6 +128,7 @@ namespace StrategyPattern
         public override WeaponType weaponType { get; set; }
         //I don't really care about creating different missile ships for this exercise, so I'm going to set all of my properties to be the same
         //for each iteration.
+        //the default constructor so I can quickly create a bunch of missile ships.
         public MissileShip()
         {
             Color = "Gerbiflob";

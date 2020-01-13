@@ -11,7 +11,18 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
+            MissileShip MS = new MissileShip();
 
+            MS.FireWeapon();
+            MS.FlyShip();
+
+            Console.ReadKey();
+
+            MS.weaponType = new InterdimensionalRiftCannon();
+
+            MS.FireWeapon();
+
+            Console.ReadKey();
         }
     }
 }
