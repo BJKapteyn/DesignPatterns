@@ -11,8 +11,11 @@ namespace ObserverPattern
         //update, execute etc. These relationships are loosly coupled, or operate with little dependency on each other. This helps allow the object's continued use
         //with relative independence, and increases flexability.
 
-        //I'll start by creating a subject and observer interface.
+        //Let's see here, I can imagine a bunch of snow sports that depend on snow in various depths. I'm going to create a snowfall instrument class as the Subject
+        //and various snow activities that are observers. Each one will have a boolean property that decides if you should do that sport. It will be dependent on the 
+        //snowfall and update each time a new snowfall is reported.
 
+        //I'll start by creating a subject and observer interface.
         public interface Subject
         {
             void AddObserver();
@@ -22,8 +25,21 @@ namespace ObserverPattern
 
         public interface Observer
         {
-            void Update();
+            void Update(float snowfall);
         }
 
+        //for the sake of flexability, I'm going to creat an abstract class that implements the Observer interface. This way if I can think of different things
+        //(like going to school or driving) that are dependent on snowfall later, I can just inherit from the Observer class rather than build another Observer.
+        public abstract class Snowsport : Observer
+        {
+            public float Snowfall { get; set; }
+            //I'll auto initialize to IsAdvisable false, better safe than sorry when it comes to snow.
+            public bool IsAdvisable { get; set; } = false;
+            public void Update(float snowfall)
+            {
+                Snowfall = snowfall;
+            }
+        }
+        //Next I'm going to create an instrument 
     }
 }
