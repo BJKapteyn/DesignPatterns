@@ -18,8 +18,8 @@ namespace ObserverPattern
         //I'll start by creating a subject and observer interface.
         public interface Subject
         {
-            void AddObserver();
-            void RemoveObserver();
+            void AddObserver(Observer o);
+            void RemoveObserver(Observer o);
             void UpdateObservers();
         }
 
@@ -28,18 +28,55 @@ namespace ObserverPattern
             void Update(float snowfall);
         }
 
-        //for the sake of flexability, I'm going to creat an abstract class that implements the Observer interface. This way if I can think of different things
-        //(like going to school or driving) that are dependent on snowfall later, I can just inherit from the Observer class rather than build another Observer.
+        //for the sake of flexability, I'm going to create an abstract class that implements the Observer interface, rather than including the snowsport's methods
+        //directly in the observer class. This way if I can think of different things that are dependent on snowfall later, (like going to school or driving) I can 
+        //just inherit from the Observer class.
         public abstract class Snowsport : Observer
         {
             public float Snowfall { get; set; }
-            //I'll auto initialize to IsAdvisable false, better safe than sorry when it comes to snow.
+            //I'll auto initialize IsAdvisable to false, better safe than sorry when it comes to snow.
             public bool IsAdvisable { get; set; } = false;
             public void Update(float snowfall)
             {
                 Snowfall = snowfall;
             }
         }
-        //Next I'm going to create an instrument 
+        //Next I'm going to create an instrument class as our Subject
+
+        public class SnowfallMeasurement : Subject
+        {
+            //let's set a little bit of logic for setting the snowfall.
+            public float SnowFall
+            {
+                get
+                {
+                    return this.SnowFall;
+                }
+                set
+                {
+                    this.SnowFall = value;
+                    //Here we go, every time we set a value for snowfall, all of the ovservers will be updated automatically. Noice.
+                    UpdateObservers();
+                }
+            }
+            //our list of observers to be interated through to update.
+            public List<Observer> ObserverList;
+            public void AddObserver(Observer o)
+            {
+                ObserverList.Add(o);
+            }
+            public void RemoveObserver(Observer o)
+            {
+                ObserverList.Remove(o);
+            }
+            //run through all of our observers and update them.
+            public void UpdateObservers()
+            {
+                foreach(Observer o in ObserverList)
+                {
+                    o.Update(this.SnowFall);
+                }
+            }
+        }
     }
 }
