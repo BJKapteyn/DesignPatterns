@@ -50,6 +50,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ObserverPattern\ObserverPattern.csproj">
+      <Project>{9fdb55db-848f-461d-8874-6a369af658cb}</Project>
+      <Name>ObserverPattern</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StrategyPattern\StrategyPattern.csproj">
       <Project>{38ac7f69-60a1-4989-b773-cffd1ff30485}</Project>
       <Name>StrategyPattern</Name>
