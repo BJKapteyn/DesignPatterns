@@ -12,17 +12,24 @@ namespace DesignPatterns
     {
         static void Main(string[] args)
         {
-            //Build us a missile ship.
-            MissileShip MS = new MissileShip();
+            SnowfallMeasurement SnowfallInstrument = new SnowfallMeasurement();
+            Observer S = new Snowboard();
+            Observer CCS = new CrossCountrySkiing();
+            Observer IS = new IceSkating();
 
-            MS.FireWeapon();
-            MS.FlyShip();
+            SnowfallInstrument.AddObserver(S);
+            SnowfallInstrument.AddObserver(CCS);
+            SnowfallInstrument.AddObserver(IS);
 
             Console.ReadKey();
-            //Swap out weapons during runtime.
-            MS.weaponType = new InterdimensionalRiftCannon();
 
-            MS.FireWeapon();
+            SnowfallInstrument.SnowFall = 3.245324;
+
+            foreach(Snowsport s in SnowfallInstrument.ObserverList)
+            {
+                Console.WriteLine(s.ObserverName);
+                s.GoOrNoGo();
+            }
 
             Console.ReadKey();
         }
