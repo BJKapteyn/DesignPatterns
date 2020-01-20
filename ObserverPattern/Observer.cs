@@ -30,18 +30,60 @@ namespace ObserverPattern
 
         //for the sake of flexability, I'm going to create an abstract class that implements the Observer interface, rather than including the snowsport's methods
         //directly in the observer class. This way if I can think of different things that are dependent on snowfall later, (like going to school or driving) I can 
-        //just inherit from the Observer class.
+        //just inherit from the Observer class, and therefore the subject interface.
         public abstract class Snowsport : Observer
         {
-            public float Snowfall { get; set; }
-            //I'll auto initialize IsAdvisable to false, better safe than sorry when it comes to snow.
+            string SportName;
+            //I'm going to make snowfall abstract because I want IsAdvisable to change depending on what the snowfall is set as.
+            public abstract float Snowfall { get; set; }
+            //This boolean property will tell us whether or not we should do this sport based on the snowfall. I'll auto-initialize it to false, better safe than sorry
+            //when it comes to snow.
             public bool IsAdvisable { get; set; } = false;
             public void Update(float snowfall)
             {
                 Snowfall = snowfall;
             }
+            //This method will be used to log to the console what we should do depending on how much snow we get.
+            public abstract void GoOrNoGo();
         }
-        //Next I'm going to create an instrument class as our Subject
+        //I'm now going to build my first snowsport that will observe snowfall.
+        public class Snowboard : Snowsport
+        {
+            //I don't think this sport will change anytime soon.
+            const string SportName = "Snowboarding";
+            public override float Snowfall
+            {
+                get
+                {
+                    return this.Snowfall;
+                }
+                set
+                {
+                    Snowfall = value;
+
+                    if(Snowfall > 2.0f)
+                    {
+                        this.IsAdvisable = true;
+                    }
+                    else
+                    {
+                        IsAdvisable = false;
+                    }
+                }
+            }
+            public override void GoOrNoGo()
+            {
+                if(IsAdvisable)
+                {
+                    Console.WriteLine("Let's shred!");
+                }
+                else
+                {
+                    Console.WriteLine("Not enough snow");
+                }
+            }
+        }
+        //Next I'm going to create a measurement class as our Subject
 
         public class SnowfallMeasurement : Subject
         {
