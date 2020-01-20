@@ -142,4 +142,17 @@ namespace StrategyPattern
         }
     }
 
+    ////Build us a missile ship.
+    //MissileShip MS = new MissileShip();
+
+    //MS.FireWeapon();
+    //MS.FlyShip();
+
+    //Console.ReadKey();
+    ////Swap out weapons during runtime.
+    //MS.weaponType = new InterdimensionalRiftCannon();
+
+    //MS.FireWeapon();
+
+    //Console.ReadKey();
 }

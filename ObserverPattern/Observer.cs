@@ -34,7 +34,7 @@ namespace ObserverPattern
         public abstract class Snowsport : Observer
         {
             string SportName;
-            //I'm going to make snowfall abstract because I want IsAdvisable to change depending on what the snowfall is set as.
+            //I'm going to make snowfall abstract because I want IsAdvisable to change depending on what the snowfall is set as. You'll see how this works in a second.
             public abstract float Snowfall { get; set; }
             //This boolean property will tell us whether or not we should do this sport based on the snowfall. I'll auto-initialize it to false, better safe than sorry
             //when it comes to snow.
@@ -60,7 +60,7 @@ namespace ObserverPattern
                 set
                 {
                     Snowfall = value;
-
+                    //Here I can set our IsAdvisable property logic. If it snows more than 2 inches, we're going snowboarding.
                     if(Snowfall > 2.0f)
                     {
                         this.IsAdvisable = true;
